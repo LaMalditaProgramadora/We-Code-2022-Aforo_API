@@ -14,7 +14,7 @@ import {
 dotenv.config();
 
 // Connect to db
-await mongoose.connect(process.env.MONGODB_TUTO_URL);
+await mongoose.connect(process.env.MONGODB_AFORO_URL);
 
 // Listener to connection error
 mongoose.connection.on("error", function (e) {
@@ -31,12 +31,13 @@ app.use(express.json());
 // Socket.io
 const server = createServer(app);
 
+/*
 const io = new Server(server, {
   cors: {
-    origin: process.env.REACT_APP_TUTO_URL,
+    origin: process.env.REACT_APP_AFORO_URL,
     methods: ["GET", "POST"]
   }
-});
+});*/
 
 // Routes
 app.get("/", (req, res) => {
@@ -52,6 +53,7 @@ server.listen(process.env.PORT || 3000, "0.0.0.0", () => {
   console.log("Se inició el servidor");
 });
 
+/*
 // Socket.io
 io.on("connection", function (socket) {
   console.log("New connection");
@@ -59,4 +61,4 @@ io.on("connection", function (socket) {
     console.log("Enviar data");
     io.emit("Send Data");
   });
-});
+});*/
