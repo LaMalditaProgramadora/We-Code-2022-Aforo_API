@@ -64,12 +64,17 @@ export const remove = async (req, res) => {
 // Emit capacity by ticket
 export const emitCapacityByTicket = async (req, res) => {
   try {
-    const capacityByNormalTran = req.body.quantity;
-    const capacityByPreferenceTran = req.body.preferenceQuantity;
+    const capacity = {
+      normalWindowQuantity: req.body.normalWindowQuantity,
+      normalPlatformQuantity: req.body.normalPlatformQuantity,
+      prefWindowQuantity: req.body.prefWindowQuantity,
+      prefPlatformQuantity: req.body.prefPlatformQuantity
+    }
+
     //to-do
     console.log("Enviar data");
-    //io.emit("Send Capacity by Ticket " + req.body.idBank, { capacityTran: capacityByNormalTran, capacityPrefTran: capacityByPreferenceTran });
-    res.json(createResponse(1, "Registro exitoso", { capacityTran: capacityByNormalTran, capacityPrefTran: capacityByPreferenceTran }));
+    //io.emit("Send Capacity by Ticket " + req.body.idBank, capacity);
+    res.json(createResponse(1, "Registro exitoso", capacity));
   } catch (e) {
     res.json(createResponse(-1, "Error en el servidor", null));
   }
