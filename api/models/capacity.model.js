@@ -1,17 +1,16 @@
 import mongoose from "mongoose";
 
 const schemaCapacity = {
-    description: String,
     bank: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Bank",
     },
     date: Date,
-    capacity_tran: Number,
-    capacity_no_tran: Number,
-    capacity_int: Number,
-    capacity_atm: Number,
-    capacity_queue: Number,
+    capacity_tran: Number, // ticket{movement}
+    capacity_no_tran: Number, // capacity_no_tran = capacity_int-capacity_tran
+    capacity_int: Number, // camera1{quantity}
+    capacity_atm: Number, // camera2{quantity}
+    capacity_queue: Number, // camera3{quantity}
 };
 
 const Capacity = mongoose.model("Capacity", schemaCapacity, "capacity");
