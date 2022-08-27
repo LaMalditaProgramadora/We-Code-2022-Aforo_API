@@ -61,15 +61,70 @@ export const remove = async (req, res) => {
   }
 });*/
 
-//Save capacity by ticket
-export const saveCapacityByTicket = async (req, res) => {
+// Emit capacity by ticket
+export const emitCapacityByTicket = async (req, res) => {
   try {
-    const capacityByNormalTransacction = req.body.quantity;
-    const capacityByNormalPreference = req.body.quantityPreference;
+    const capacityByNormalTran = req.body.quantity;
+    const capacityByPreferenceTran = req.body.preferenceQuantity;
     //to-do
     console.log("Enviar data");
-    //io.emit("Send Capacity by Ticket " + req.body.idBank, { capacityByNormalTransacction, capacityByNormalPreference }) ;
-    res.json(createResponse(1, "Registro exitoso", capacityByTransacction));
+    //io.emit("Send Capacity by Ticket " + req.body.idBank, { capacityTran: capacityByNormalTran, capacityPrefTran: capacityByPreferenceTran });
+    res.json(createResponse(1, "Registro exitoso", { capacityTran: capacityByNormalTran, capacityPrefTran: capacityByPreferenceTran }));
+  } catch (e) {
+    res.json(createResponse(-1, "Error en el servidor", null));
+  }
+};
+
+// Emit capacity by sensor
+export const emitCapacityBySensor = async (req, res) => {
+  try {
+    const capacityInt = req.body.quantity;
+    //to-do
+    console.log("Enviar data");
+    //io.emit("Send Capacity by Sensor " + req.body.idBank, { capacityInt: capacityInt });
+    res.json(createResponse(1, "Registro exitoso", { capacityInt: capacityInt }));
+  } catch (e) {
+    console.log(e);
+    res.json(createResponse(-1, "Error en el servidor", null));
+  }
+};
+
+// Emit capacity by camera1
+export const emitCapacityByCamera1 = async (req, res) => {
+  try {
+    const capacityByCamera1 = req.body.quantity;
+    //to-do
+    console.log("Enviar data");
+    //io.emit("Send Capacity by Camera 1" + req.body.idBank, { capacityInt: capacityByCamera1 }) ;
+    res.json(createResponse(1, "Registro exitoso", { capacityInt: capacityByCamera1 }));
+  } catch (e) {
+    res.json(createResponse(-1, "Error en el servidor", null));
+  }
+};
+
+//Emit capacity by camera2
+export const emitCapacityByCamera2 = async (req, res) => {
+  try {
+    const capacityByCamera2 = req.body.quantity;
+    //to-do
+    console.log("Enviar data");
+    //io.emit("Send Capacity by Camera 2" + req.body.idBank, { capacityAtm: capacityByCamera2 }) ;
+    res.json(createResponse(1, "Registro exitoso", { capacityAtm: capacityByCamera2 }));
+  } catch (e) {
+    res.json(createResponse(-1, "Error en el servidor", null));
+  }
+};
+
+// Emit capacity by camera3
+export const emitCapacityByCamera3 = async (req, res) => {
+  try {
+    const capacityByCamera3Atm = req.body.quantityAtm;
+    const capacityByCamera3Tran = req.body.quantityTran;
+
+    //to-do
+    console.log("Enviar data");
+    //io.emit("Send Capacity by Camera 3" + req.body.idBank, { capacityQueueAtm: capacityByCamera3Atm, capacityQueueTran: capacityByCamera3Tran });
+    res.json(createResponse(1, "Registro exitoso", { capacityByCamera3Atm, capacityByCamera3Tran }));
   } catch (e) {
     res.json(createResponse(-1, "Error en el servidor", null));
   }
