@@ -11,6 +11,16 @@ export const listById = async (req, res) => {
   }
 };
 
+export const listByDistrict = async (req, res) => {
+  try {
+    const { _id: _id } = req.query;
+    let banks = await Bank.findById({district: _id});
+    res.json(createResponse(1, "Bancos encontrados", banks));
+  } catch (e) {
+    res.json(createResponse(-1, "Error en el servidor", null));
+  }
+};
+
 export const listAll = async (req, res) => {
   try {
     let banks = await Bank.find();

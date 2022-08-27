@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 const schemaCapacity = {
-    description: String,
     bank: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Bank",
