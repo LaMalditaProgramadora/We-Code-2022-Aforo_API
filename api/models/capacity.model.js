@@ -6,11 +6,13 @@ const schemaCapacity = {
         ref: "Bank",
     },
     date: Date,
-    capacity_tran: Number, // ticket{movement}
-    capacity_no_tran: Number, // capacity_no_tran = capacity_int-capacity_tran
-    capacity_int: Number, // camera1{quantity}
-    capacity_atm: Number, // camera2{quantity}
-    capacity_queue: Number, // camera3{quantity}
+    capacityNormalWindow: Number,
+    capacityNormalPlatform: Number,
+    capacityPrefWindow: Number,
+    capacityPrefPlatform: Number,
+    capacityTranQueue: Number,
+    capacityAtmQueue: Number,
+    capacityAtm: Number,
 };
 
 const Capacity = mongoose.model("Capacity", schemaCapacity, "capacity");
