@@ -1,5 +1,6 @@
 import { Capacity } from "../models/_index.js";
 import { createResponse } from "../utils/response.js";
+import { Server } from "socket.io";
 
 export const listById = async (req, res) => {
   try {
@@ -49,6 +50,27 @@ export const remove = async (req, res) => {
     res.json(createResponse(1, "Eliminación exitosa", null));
   } catch (e) {
     console.log(e);
+    res.json(createResponse(-1, "Error en el servidor", null));
+  }
+};
+
+/*const io = new Server(server, {
+  cors: {
+    origin: process.env.REACT_APP_AFORO_URL,
+    methods: ["GET", "POST"]
+  }
+});*/
+
+//Save capacity by ticket
+export const saveCapacityByTicket = async (req, res) => {
+  try {
+    const capacityByNormalTransacction = req.body.quantity;
+    const capacityByNormalPreference = req.body.quantityPreference;
+    //to-do
+    console.log("Enviar data");
+    //io.emit("Send Capacity by Ticket " + req.body.idBank, { capacityByNormalTransacction, capacityByNormalPreference }) ;
+    res.json(createResponse(1, "Registro exitoso", capacityByTransacction));
+  } catch (e) {
     res.json(createResponse(-1, "Error en el servidor", null));
   }
 };
