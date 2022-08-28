@@ -1,5 +1,7 @@
 import { Bank } from "../models/_index.js";
 import { createResponse } from "../utils/response.js";
+import mongoose from "mongoose";
+
 
 export const listById = async (req, res) => {
   try {
@@ -14,9 +16,11 @@ export const listById = async (req, res) => {
 export const listByDistrict = async (req, res) => {
   try {
     const { _id: _id } = req.query;
-    let banks = await Bank.findById({district: _id});
+    console.log(mongoose.Types.ObjectId(_id));
+    const banks = await Bank.find({ district: mongoose.Types.ObjectId(_id) });
     res.json(createResponse(1, "Bancos encontrados", banks));
   } catch (e) {
+    console.log(e);
     res.json(createResponse(-1, "Error en el servidor", null));
   }
 };

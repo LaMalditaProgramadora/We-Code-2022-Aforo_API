@@ -10,7 +10,8 @@ const schemaBank = {
     capacity: Number,
     category: String,
     image: String,
-    address: String
+    address: String,
+    location: String
 };
 
 const Bank = mongoose.model("Bank", schemaBank, "banks");

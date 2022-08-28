@@ -67,3 +67,14 @@ export const emitInput = async (req, res) => {
     res.json(createResponse(-1, "Error en el servidor", null));
   }
 };
+
+export const createHist = async (body) => {
+  try {
+    const capacity = new Capacity(body);
+    const capacityBank = await capacity.save();
+    console.log("Guardado en BD exitoso");
+  } catch (e) {
+    res.json(createResponse(-1, "Error en el servidor", null));
+    console.log("Error en el guardado en BD");
+  }
+};

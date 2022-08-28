@@ -4,12 +4,13 @@ import dotenv from "dotenv";
 import cors from "cors";
 import { createServer } from 'http';
 import { Server } from "socket.io";
-
+import axios from "axios";
 import {
   DistrictRouter,
   BankRouter,
   CapacityRouter,
 } from "./api/routes/_index.js";
+import { CapacityController } from "./api/controllers/_index.js";
 
 dotenv.config();
 
@@ -52,20 +53,29 @@ app.use("/", DistrictRouter);
 app.use("/", BankRouter);
 app.use("/", CapacityRouter);
 
-app.on('testEvent', function () {
-  return console.log('responded to testEvent');
-});
-
 // Launch server
 server.listen(process.env.PORT, "0.0.0.0", () => {
   console.log("Se inició el servidor");
 });
 
 // Proceso de registro histórico
-app.on('saveCapacity', ({ message, data }) => {
-  console.log('Evento: '.concat(message));
-  socket.emit(message, data);
+
+const urlInput = process.env.REACT_APP_AFORO_URL;
+
+const saveCapacity = () => {
+  axios.get(`${urlInput}/capacity`).then(data => {
+    if(data.data) {
+      data.data.forEach(element => {
+        const save = CapacityController.createHist(element).then((result)=> {
+          console.log("OK");
+        });
+      });
+    }
 });
+}
+
+// 1 min
+setInterval(saveCapacity, 1000 * 60 * 2);
 
 
 io.on('connection', function (socket) {
