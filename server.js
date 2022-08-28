@@ -60,7 +60,8 @@ server.listen(process.env.PORT, "0.0.0.0", () => {
 
 // Proceso de registro histórico
 
-const urlInput = process.env.REACT_APP_INPUT_URL;
+const urlInput = process.env.APP_INPUT_HEROKU;
+console.log(urlInput);
 
 const saveCapacity = () => {
   try {
