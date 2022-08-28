@@ -63,15 +63,20 @@ server.listen(process.env.PORT, "0.0.0.0", () => {
 const urlInput = process.env.REACT_APP_AFORO_URL;
 
 const saveCapacity = () => {
-  axios.get(`${urlInput}/capacity`).then(data => {
-    if(data.data) {
-      data.data.forEach(element => {
-        const save = CapacityController.createHist(element).then((result)=> {
-          console.log("OK");
+  try {
+    axios.get(`${urlInput}/capacity`).then(data => {
+      console.log(data.data);
+      if (data.data) {
+        data.data.forEach(element => {
+          const save = CapacityController.createHist(element).then((result) => {
+            console.log("OK");
+          });
         });
-      });
-    }
-});
+      }
+    });
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 // 1 min
