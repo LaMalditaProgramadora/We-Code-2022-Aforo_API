@@ -13,6 +13,8 @@ const schemaCapacity = {
     capacityTranQueue: Number,
     capacityAtmQueue: Number,
     capacityAtm: Number,
+    capacityInt: Number,
+    capacitySensorInt: Number
 };
 
 const Capacity = mongoose.model("Capacity", schemaCapacity, "capacity");

@@ -54,63 +54,15 @@ export const remove = async (req, res) => {
   }
 };
 
-// Emit capacity by ticket
-export const emitCapacityByTicket = async (req, res) => {
+// Emit input
+export const emitInput = async (req, res) => {
   try {
-    const capacity = {
-      capacityNormalWindow: req.body.normalWindowQuantity,
-      capacityNormalPlatform: req.body.normalPlatformQuantity,
-      capacityPrefWindow: req.body.prefWindowQuantity,
-      capacityPrefPlatform: req.body.prefPlatformQuantity
-    }
-    app.emit('emitSocket', {message: `Send Capacity by Ticket ${req.body.idBank}`, data: capacity});
-    res.json(createResponse(1, "Registro exitoso", capacity));
-  } catch (e) {
-    res.json(createResponse(-1, "Error en el servidor", null));
-  }
-};
-
-// Emit capacity by sensor
-export const emitCapacityBySensor = async (req, res) => {
-  try {
-    const capacitySensorInt = req.body.quantity;
-    app.emit('emitSocket', {message: `Send Capacity by Sensor ${req.body.idBank}`, data: { capacitySensorInt: capacitySensorInt }});
-    res.json(createResponse(1, "Registro exitoso", { capacitySensorInt: capacitySensorInt }));
-  } catch (e) {
-    console.log(e);
-    res.json(createResponse(-1, "Error en el servidor", null));
-  }
-};
-
-// Emit capacity by camera1
-export const emitCapacityByCamera1 = async (req, res) => {
-  try {
-    const capacityInt = req.body.quantity;
-    app.emit('emitSocket', {message: `Send Capacity by Camera 1 ${req.body.idBank}`, data: { capacityInt: capacityInt }});
-    res.json(createResponse(1, "Registro exitoso", { capacityInt: capacityInt }));
-  } catch (e) {
-    res.json(createResponse(-1, "Error en el servidor", null));
-  }
-};
-
-//Emit capacity by camera2
-export const emitCapacityByCamera2 = async (req, res) => {
-  try {
-    const capacityAtm = req.body.quantity;
-    app.emit('emitSocket', {message: `Send Capacity by Camera 2 ${req.body.idBank}`, data: { capacityAtm: capacityAtm }});
-    res.json(createResponse(1, "Registro exitoso", { capacityAtm: capacityAtm }));
-  } catch (e) {
-    res.json(createResponse(-1, "Error en el servidor", null));
-  }
-};
-
-// Emit capacity by camera3
-export const emitCapacityByCamera3 = async (req, res) => {
-  try {
-    const capacityTranQueue = req.body.quantityTran;
-    const capacityAtmQueue = req.body.quantityAtm;
-    app.emit('emitSocket', {message: `Send Capacity by Camera 3 ${req.body.idBank}`, data: { capacityTranQueue: capacityTranQueue, capacityAtmQueue: capacityAtmQueue }});
-    res.json(createResponse(1, "Registro exitoso", { capacityTranQueue: capacityTranQueue, capacityAtmQueue: capacityAtmQueue }));
+    const capacities = req.body;
+    capacities.forEach((capacity) => {
+      app.emit('emitSocket', {message: `input ${capacity.idBank}`, data: capacity});
+    });
+    
+    res.json(createResponse(1, "Registro exitoso", null));
   } catch (e) {
     res.json(createResponse(-1, "Error en el servidor", null));
   }

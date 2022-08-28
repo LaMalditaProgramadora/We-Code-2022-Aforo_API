@@ -61,6 +61,13 @@ server.listen(process.env.PORT, "0.0.0.0", () => {
   console.log("Se inició el servidor");
 });
 
+// Proceso de registro histórico
+app.on('saveCapacity', ({ message, data }) => {
+  console.log('Evento: '.concat(message));
+  socket.emit(message, data);
+});
+
+
 io.on('connection', function (socket) {
   console.log("Conexión exitosa");
 
