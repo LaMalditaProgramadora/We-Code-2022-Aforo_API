@@ -65,16 +65,19 @@ const urlInput = process.env.REACT_APP_AFORO_URL;
 const saveCapacity = () => {
   try {
     axios.get(`${urlInput}/capacity`).then((data) => {
-      console.log(data.data);
-      if (data.data) {
+      console.log(data);
+      if (data && data.data) {
+        console.log("1");
+        console.log(data.data);
+        /*
         data.data.forEach(element => {
           const save = CapacityController.createHist(element).then((result) => {
             console.log("OK");
           });
-        });
+        });*/
       }
     }, (error) => {
-      onsole.log(error);
+      console.log(error);
     });
   } catch (e) {
     console.log(e);
@@ -82,7 +85,7 @@ const saveCapacity = () => {
 }
 
 // 1 min
-setInterval(saveCapacity, 1000 * 60 * 0.25);
+setInterval(saveCapacity, 1000 * 60 * 1);
 
 
 io.on('connection', function (socket) {
