@@ -68,7 +68,7 @@ const saveCapacity = () => {
     const urlString = urlInput.concat('/capacity');
     axios.get(urlString).then((data) => {
       if (data && data.data) {
-        console.log("1");
+        console.log(urlString);
         data.data.forEach(element => {
           const save = CapacityController.createHist(element).then((result) => {
             console.log("OK");
