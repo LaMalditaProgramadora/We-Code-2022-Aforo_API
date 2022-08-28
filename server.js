@@ -60,7 +60,7 @@ server.listen(process.env.PORT, "0.0.0.0", () => {
 
 // Proceso de registro histórico
 
-const urlInput = process.env.REACT_APP_AFORO_URL;
+const urlInput = process.env.REACT_APP_INPUT_URL;
 
 const saveCapacity = () => {
   try {
