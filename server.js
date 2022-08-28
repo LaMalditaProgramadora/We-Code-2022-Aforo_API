@@ -81,7 +81,7 @@ const saveCapacity = () => {
   }
 }
 
-setInterval(saveCapacity, 1000 * 60 * 5);
+setInterval(saveCapacity, 1000 * 60 * 1);
 
 io.on('connection', function (socket) {
   console.log("Conexión exitosa");
