@@ -85,7 +85,7 @@ const saveCapacity = () => {
 }
 
 // 1 min
-setInterval(saveCapacity, 1000 * 60 * 1);
+// setInterval(saveCapacity, 1000 * 60 * 1);
 
 
 io.on('connection', function (socket) {
