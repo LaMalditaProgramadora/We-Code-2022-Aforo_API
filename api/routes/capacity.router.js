@@ -2,7 +2,8 @@ import express from "express";
 
 import { CapacityController } from "../controllers/_index.js";
 
-const { listAll, listById, create, update, remove, emitCapacityByCamera1, emitCapacityByCamera2, emitCapacityByCamera3, emitCapacityByTicket, emitCapacityBySensor } =
+const { listAll, listById, create, update, remove, emitCapacityByCamera1, emitCapacityByCamera2,
+  emitCapacityByCamera3, emitCapacityByTicket, emitCapacityBySensor } =
   CapacityController;
 
 const router = express.Router();
@@ -17,7 +18,7 @@ const capacityRouter = {
   EMIT_CAMERA_2: "/capacity/camera/2",
   EMIT_CAMERA_3: "/capacity/camera/3",
   EMIT_TICKET: "/capacity/ticket",
-  EMIT_SENSOR: "/capacity/sensor",
+  EMIT_SENSOR: "/capacity/sensor"
 };
 
 router.get(capacityRouter.LIST_ALL, listAll);

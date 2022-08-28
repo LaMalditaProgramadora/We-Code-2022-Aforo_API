@@ -1,6 +1,6 @@
 import { Capacity } from "../models/_index.js";
 import { createResponse } from "../utils/response.js";
-import io from "../../server.js";
+import app from "../../server.js";
 
 export const listById = async (req, res) => {
   try {
@@ -63,8 +63,7 @@ export const emitCapacityByTicket = async (req, res) => {
       capacityPrefWindow: req.body.prefWindowQuantity,
       capacityPrefPlatform: req.body.prefPlatformQuantity
     }
-    io.emit(`Send Capacity by Ticket ${req.body.idBank}`, capacity);
-    console.log("emitCapacityByTicket");
+    app.emit('emitSocket', {message: `Send Capacity by Ticket ${req.body.idBank}`, data: capacity});
     res.json(createResponse(1, "Registro exitoso", capacity));
   } catch (e) {
     res.json(createResponse(-1, "Error en el servidor", null));
@@ -75,8 +74,7 @@ export const emitCapacityByTicket = async (req, res) => {
 export const emitCapacityBySensor = async (req, res) => {
   try {
     const capacitySensorInt = req.body.quantity;
-    console.log("emitCapacityBySensor");
-    io.emit(`Send Capacity by Sensor ${req.body.idBank}`, { capacitySensorInt: capacitySensorInt });
+    app.emit('emitSocket', {message: `Send Capacity by Sensor ${req.body.idBank}`, data: { capacitySensorInt: capacitySensorInt }});
     res.json(createResponse(1, "Registro exitoso", { capacitySensorInt: capacitySensorInt }));
   } catch (e) {
     console.log(e);
@@ -88,9 +86,7 @@ export const emitCapacityBySensor = async (req, res) => {
 export const emitCapacityByCamera1 = async (req, res) => {
   try {
     const capacityInt = req.body.quantity;
-    //to-do
-    console.log("emitCapacityByCamera1");
-    io.emit(`Send Capacity by Camera 1 ${req.body.idBank}`, { capacityInt: capacityInt }) ;
+    app.emit('emitSocket', {message: `Send Capacity by Camera 1 ${req.body.idBank}`, data: { capacityInt: capacityInt }});
     res.json(createResponse(1, "Registro exitoso", { capacityInt: capacityInt }));
   } catch (e) {
     res.json(createResponse(-1, "Error en el servidor", null));
@@ -101,8 +97,7 @@ export const emitCapacityByCamera1 = async (req, res) => {
 export const emitCapacityByCamera2 = async (req, res) => {
   try {
     const capacityAtm = req.body.quantity;
-    console.log("emitCapacityByCamera2");
-    io.emit(`Send Capacity by Camera 2 ${req.body.idBank}`, { capacityAtm: capacityAtm }) ;
+    app.emit('emitSocket', {message: `Send Capacity by Camera 2 ${req.body.idBank}`, data: { capacityAtm: capacityAtm }});
     res.json(createResponse(1, "Registro exitoso", { capacityAtm: capacityAtm }));
   } catch (e) {
     res.json(createResponse(-1, "Error en el servidor", null));
@@ -114,9 +109,7 @@ export const emitCapacityByCamera3 = async (req, res) => {
   try {
     const capacityTranQueue = req.body.quantityTran;
     const capacityAtmQueue = req.body.quantityAtm;
-
-    console.log("emitCapacityByCamera3");
-    io.emit(`Send Capacity by Camera 3 ${req.body.idBank}`, { capacityTranQueue: capacityTranQueue, capacityAtmQueue: capacityAtmQueue });
+    app.emit('emitSocket', {message: `Send Capacity by Camera 3 ${req.body.idBank}`, data: { capacityTranQueue: capacityTranQueue, capacityAtmQueue: capacityAtmQueue }});
     res.json(createResponse(1, "Registro exitoso", { capacityTranQueue: capacityTranQueue, capacityAtmQueue: capacityAtmQueue }));
   } catch (e) {
     res.json(createResponse(-1, "Error en el servidor", null));

@@ -36,7 +36,6 @@ app.use(express.json());
 // Socket.io
 const server = createServer(app);
 
-
 const io = new Server(server, {
   cors: {
     origin: process.env.REACT_APP_AFORO_URL,
@@ -53,21 +52,23 @@ app.use("/", DistrictRouter);
 app.use("/", BankRouter);
 app.use("/", CapacityRouter);
 
+app.on('testEvent', function () {
+  return console.log('responded to testEvent');
+});
+
 // Launch server
-server.listen(process.env.PORT || 3000, "0.0.0.0", () => {
+server.listen(process.env.PORT, "0.0.0.0", () => {
   console.log("Se inició el servidor");
 });
 
+io.on('connection', function (socket) {
+  console.log("Conexión exitosa");
 
+  app.on('emitSocket', ({ message, data }) => {
+    console.log('Evento: '.concat(message));
+    socket.emit(message, data);
+  });
 
-// Socket.io
+});
 
-io.on("connection", function (socket) {
-  console.log("New connection");
-  /*
-  socket.on("Receive Data", function () {
-    console.log("Enviar data");
-    io.emit("Send Data");
-  });*/});
-
-export default io;
+export default app;
