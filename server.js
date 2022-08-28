@@ -60,12 +60,13 @@ server.listen(process.env.PORT, "0.0.0.0", () => {
 
 // Proceso de registro histórico
 
-const urlInput = process.env.APP_INPUT_HEROKU;
+const urlInput = process.env.INPUT_HEROKU_URL;
 console.log(urlInput);
 
 const saveCapacity = () => {
   try {
-    axios.get(`${urlInput}/capacity`).then((data) => {
+    const urlString = urlInput.concat('/capacity');
+    axios.get(urlString).then((data) => {
       if (data && data.data) {
         console.log("1");
         data.data.forEach(element => {
